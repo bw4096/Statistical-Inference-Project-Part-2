@@ -414,9 +414,66 @@ str(ToothGrowth)</code></pre>
 </div>
 <div id="hypothesis-testing" class="section level2">
 <h2>Hypothesis Testing</h2>
+<p>The following t-test tests the null hypothesis that there is a difference in length due to choice of supplement,</p>
+<pre class="r"><code>t.test(ToothGrowth$len ~ ToothGrowth$supp)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  ToothGrowth$len by ToothGrowth$supp
+## t = 1.9153, df = 55.309, p-value = 0.06063
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.1710156  7.5710156
+## sample estimates:
+## mean in group OJ mean in group VC 
+##         20.66333         16.96333</code></pre>
+<p>The following t-tests test whether there is a difference dosages of each supplement. The data was split into three groups, each goup contins the individual does so we can compare how each supplement at each dose compares. The first test tests the 0.5mg/day dosage.</p>
+<pre class="r"><code>dose0.5 &lt;- subset(ToothGrowth, ToothGrowth$dose==c(0.5))
+dose2 &lt;- subset(ToothGrowth, ToothGrowth$dose==c(2))
+dose1   &lt;- subset(ToothGrowth, ToothGrowth$dose==c(1))
+t.test(dose0.5$len ~ dose0.5$supp, paired = FALSE, var.equal = FALSE)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  dose0.5$len by dose0.5$supp
+## t = 3.1697, df = 14.969, p-value = 0.006359
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  1.719057 8.780943
+## sample estimates:
+## mean in group OJ mean in group VC 
+##            13.23             7.98</code></pre>
+<p>The second test tests the 1mg/day dosage.</p>
+<pre class="r"><code>t.test(dose1$len ~ dose1$supp, paired = FALSE, var.equal = FALSE)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  dose1$len by dose1$supp
+## t = 4.0328, df = 15.358, p-value = 0.001038
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  2.802148 9.057852
+## sample estimates:
+## mean in group OJ mean in group VC 
+##            22.70            16.77</code></pre>
+<p>the third test tests the 2mg/day dosage.</p>
+<pre class="r"><code>t.test(dose2$len ~ dose2$supp, paired = FALSE, var.equal = FALSE)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  dose2$len by dose2$supp
+## t = -0.046136, df = 14.04, p-value = 0.9639
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -3.79807  3.63807
+## sample estimates:
+## mean in group OJ mean in group VC 
+##            26.06            26.14</code></pre>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
+<p>The first t-test, where we tested the null hypothesis of no difference between using either supplement resulted in not being able to reject the null hypothesis. The p-value was above .05 and the 95% confidence interval contained zero.</p>
+<p>The tests related to the dosage of the supplement resulted in being able to reject the null hypothesis of no difference in supplements at the same dosage for the two lower dosages. Both tests for the two lower dosages had low p-values, high t values, and 95% confidence intervals not containg zero. Thus the smaller dosages showed significant tooth length difference when orange juice was supplemented rather than vitamin C. We could nor reject the null hypothesis at the higher dosage. The p-value was high and the 95% confidence interval contained zero. So there was no significant difference between the supplemets at 2mg/day.</p>
 </div>
 
 
