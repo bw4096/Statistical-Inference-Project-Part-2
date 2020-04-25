@@ -4,3 +4,47 @@ author: "Bryan Willauer"
 date: "4/25/2020"
 output: html_document
 ---
+
+## Data Summary ##
+
+The data comes from an experiment on the effect of vitamin C on tooth growth in Guinea Pigs. The data is
+formatted as a data frame with 60 observations of three variables.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Description
+   
+1. len  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  numeric  &nbsp;&nbsp;&nbsp; tooth length
+
+2. supp  &nbsp;&nbsp;&nbsp; factor  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  supplement type (vitamin C VC or orange Juice OJ)
+
+3. dose  &nbsp;&nbsp;&nbsp; numeric &nbsp;&nbsp; dose in mg/day
+
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+data("ToothGrowth")
+str(ToothGrowth)
+head(ToothGrowth)
+summary(ToothGrowth)
+```
+
+
+
+## Exploratory Data Analysis ##
+
+```{r}
+ToothGrowth %>% ggplot(aes(as.factor(dose),len, fill = supp)) +
+        facet_grid(.~ supp) +
+        geom_boxplot() +
+        labs(x = "Dose", y = "Length") +
+        ggtitle("Figure #1: Tooth Length By Dose Per Supplement")
+```
+
+Preliminary analysis seems to show that tooth length increases with increasing dosages of both supplements.
+Howeever, lower doses of Orange Juice look to do better that the lower doses of Vitamin C.
+
+
+## Hypothesis Testing ##
+
+
+
+## Conclusion ##
