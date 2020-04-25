@@ -2,7 +2,9 @@
 title: "Statistical Inference Project Part 2"
 author: "Bryan Willauer"
 date: "4/25/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ## Data Summary ##
@@ -40,20 +42,20 @@ ToothGrowth %>% ggplot(aes(as.factor(dose),len, fill = supp)) +
 ```
 
 Preliminary analysis seems to show that tooth length increases with increasing dosages of both supplements.
-Howeever, lower doses of Orange Juice look to do better that the lower doses of Vitamin C.
+However, lower dosages of Orange Juice look to do better than the lower dosages of Vitamin C.
 
 
 ## Hypothesis Testing ##
 
-The following t-test tests the null hypothesis that there is a difference in length due to choice of supplement,
+The following t-test tests the null hypothesis that there is a difference in length due to choice of supplement.
 
 ```{r}
 t.test(ToothGrowth$len ~ ToothGrowth$supp)
 ```
 
-The following t-tests test whether there is a difference dosages of each supplement. The data was split into three groups,
- each goup contins the individual does so we can compare how each supplement at each dose compares. The first test tests the
- 0.5mg/day dosage. 
+The following t-tests test whether there is a difference between dosages of each supplement. The data was split into three
+groups, each group contains the individual dosages so we can compare how each supplement at each dosage compares. The first
+test tests the 0.5mg/day dosage. 
 
 ```{r}
 dose0.5 <- subset(ToothGrowth, ToothGrowth$dose==c(0.5))
@@ -83,9 +85,9 @@ able to reject the null hypothesis. The p-value was above .05 and the 95% confid
 The tests related to the dosage of the supplement resulted in being able to reject the null hypothesis of no difference in 
 supplements at the same dosage for the two lower dosages. Both tests for the two lower dosages had low p-values, high t 
 values, and 95% confidence intervals not containg zero. Thus the smaller dosages showed significant tooth length difference 
-when orange juice was supplemented rather than vitamin C. We could nor reject the null hypothesis at the higher dosage. The
-p-value was high and the 95% confidence interval contained zero. So there was no significant difference between the supplemets
-at 2mg/day.
+when orange juice was supplemented rather than vitamin C. We could not reject the null hypothesis at the higher dosage. The
+p-value was high and the 95% confidence interval contained zero. So there was no significant difference between the
+supplements at 2mg/day.
 
 
 
