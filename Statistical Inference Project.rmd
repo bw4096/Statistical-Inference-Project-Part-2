@@ -1,0 +1,6 @@
+---
+title: "Statistical Inference Project Part 2"
+author: "Bryan Willauer"
+date: "4/25/2020"
+output: html_document
+---
